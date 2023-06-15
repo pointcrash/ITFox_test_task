@@ -14,7 +14,7 @@ class FoxToken(models.Model):
     created = models.DateTimeField(_("Created"), auto_now_add=True)
 
     class Meta:
-        abstract = 'rest_framework.authtoken' not in settings.INSTALLED_APPS
+        # abstract = 'rest_framework.authtoken' not in settings.INSTALLED_APPS
         verbose_name = _("Token")
         verbose_name_plural = _("Tokens")
 
