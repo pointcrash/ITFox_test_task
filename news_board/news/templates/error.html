@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center my-auto">
+    <div class="col-4">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Ошибка</h4>
+            <p>{{ error_message }}</p>
+            <hr>
+            <p class="mb-0">Пожалуйста, попробуйте еще раз позже.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
