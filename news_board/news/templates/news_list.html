@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+
+    {% if form %}
+    <form method="post" enctype="multipart/form-data" class="mx-auto" style="width: 700px; margin: 50px;">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="mb-3">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}
+            <small class="form-text">{{ field.help_text }}</small>
+            {% endif %}
+            {% if field.errors %}
+            <div class="alert alert-danger">
+                {% for error in field.errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-secondary">Добавить новость</button>
+    </form>
+  {% endif %}
+
+    <h1 class="text-center">Новости</h1>
+    {% for news_item in news %}
+      <div class="card mb-3">
+        <div class="card-header">
+          <h5>{{ news_item.title }}</h5>
+        </div>
+        <div class="card-body">
+          <p><strong>Автор:</strong> {{ news_item.author }}</p>
+          <p>{{ news_item.text }}</p>
+          <p class="text-muted mb-0"><small><strong>Дата добавления:</strong> {{ news_item.time_created }}</small></p>
+        </div>
+      </div>
+    {% empty %}
+      <p>No news available.</p>
+    {% endfor %}
+  </div>
+
+<script>
+    $.ajaxSetup({
+  headers: {
+    'Authorization': 'Token ' + localStorage.getItem('token') // Получаем токен из Local Storage
+  }
+});
+</script>
+
+{% endblock %}

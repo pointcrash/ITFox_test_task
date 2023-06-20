@@ -10,8 +10,9 @@ from news.models import News
 def news_list(request):
     response = requests.get('http://127.0.0.1:8000/api/news/')
     news = response.json()
-    for item in news:
-        item['time_created'] = datetime.datetime.strptime(item['time_created'], '%Y-%m-%dT%H:%M:%S.%f%z')
+    if len(news) > 1:
+        for item in news:
+            item['time_created'] = datetime.datetime.strptime(item['time_created'], '%Y-%m-%dT%H:%M:%S.%f%z')
     print(news)
 
     if request.method == 'POST':

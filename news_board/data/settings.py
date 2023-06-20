@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework.authtoken',
     'main',
     'users',
     'news',
@@ -105,7 +106,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'users.authentications.CustomAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
 }
